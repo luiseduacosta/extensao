@@ -10,6 +10,7 @@
 
 <div class="row">
     <aside class="navbar navbar-expand-lg navbar-light bg-light">
+        <?php if ($this->request->is('admin')): ?>
         <div class="col-auto">
             <?= $this->Form->postLink(
                 __('Excluir'),
@@ -18,6 +19,7 @@
             ) ?>
             <?= $this->Html->link(__('Listar informações'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
+        <?php endif; ?>
     </aside>
 </div>
 <div class="row">

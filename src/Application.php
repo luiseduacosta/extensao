@@ -26,6 +26,7 @@ use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
+use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
@@ -54,6 +55,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
+        ServerRequest::addDetector('admin', function (ServerRequest $request): bool {
+            $identity = $request->getAttribute('identity');
+            return $identity !== null && isset($identity->categoria) && (string)$identity->categoria === '1';
+        });
+
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
         } else {
@@ -77,8 +83,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     /**
      * Setup the middleware queue your application will use.
      *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
-     * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
+     * @param MiddlewareQueue $middlewareQueue The middleware queue to setup.
+     * @return MiddlewareQueue The updated middleware queue.
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue {
         $middlewareQueue
