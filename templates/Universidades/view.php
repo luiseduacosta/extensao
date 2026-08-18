@@ -18,7 +18,7 @@
 <div class="row">
     <div class="container justify-content-left">
         <div class="col-auto">
-            <h3><?= h($universidade->universidade) ?></h3>
+            <h3><?= h($universidade->universidade ?? '') ?></h3>
             <table aria-describedby='Universidades' class="table table-responsive table-hover">
                 <tr>
                     <th><?= __('Id') ?></th>
@@ -26,11 +26,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Universidade') ?></th>
-                    <td><?= h($universidade->universidade) ?></td>
+                    <td><?= h($universidade->universidade ?? '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observações') ?></th>
-                    <td><?= h($universidade->observacoes) ?></td>
+                    <td><?= h($universidade->observacoes ?? '') ?></td>
                 </tr>
             </table>
             <div class="related">
@@ -48,10 +48,10 @@
                             <?php foreach ($universidade->extensoes as $extensoes) : ?>
                                 <tr>
                                     <td><?= h($extensoes->id) ?></td>
-                                    <td><?= $this->Html->link($extensoes->titulo, ['controller' => 'extensoes', 'action' => 'view', $extensoes->id]) ?></td>
-                                    <td><?= h($extensoes->coordenacao) ?></td>
-                                    <td><?= h($extensoes->unidade) ?></td>
-                                    <td><?= $extensoes->has('essextensao') ? h($extensoes->essextensao->titulo): '' ?></td>
+                                    <td><?= $this->Html->link($extensoes->titulo ?? __('(sem título)'), ['controller' => 'extensoes', 'action' => 'view', $extensoes->id]) ?></td>
+                                    <td><?= h($extensoes->coordenacao ?? '') ?></td>
+                                    <td><?= h($extensoes->unidade ?? '') ?></td>
+                                    <td><?= $extensoes->has('essextensao') ? h($extensoes->essextensao->titulo ?? '') : '' ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>

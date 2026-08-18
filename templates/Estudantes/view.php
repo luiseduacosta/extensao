@@ -215,7 +215,7 @@
                                     <?= h($extensionistas->id) ?>
                                 </td>
                                 <td>
-                                    <?= $extensionistas->has('extensao') ? $this->Html->link($extensionistas->extensao->titulo, ['controller' => 'Extensoes', 'action' => 'view', $extensionistas->extensao->id]) : '' ?>
+                                    <?= $extensionistas->has('extensao') && !empty($extensionistas->extensao->titulo) ? $this->Html->link($extensionistas->extensao->titulo, ['controller' => 'Extensoes', 'action' => 'view', $extensionistas->extensao->id]) : ($extensionistas->has('extensao') ? h($extensionistas->extensao->titulo ?? '') : '') ?>
                                 </td>
                                 <td>
                                     <?= h($extensionistas->cargahoraria) ?>

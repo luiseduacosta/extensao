@@ -40,12 +40,12 @@ endif;
                 <?php foreach ($essextensoes as $extensao): ?>
                     <tr>
                         <td><?= $this->Number->format($extensao->id, ['pattern' => '#####']) ?></td>
-                        <td><?= $this->Html->link($extensao->titulo, ['action' => 'view', $extensao->id]) ?></td>
+                        <td><?= $this->Html->link($extensao->titulo ?? __('(sem título)'), ['action' => 'view', $extensao->id]) ?></td>
 
                         <?php if (isset($user)): ?>
                             <?php if ($user->categoria == 1): ?>
-                                <td><?= $extensao->has('docente') ? $this->Html->link($extensao->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $extensao->docente->id]) : '' ?></td>
-                                <td><?= $extensao->has('tae') ? $this->Html->link($extensao->tae->nome, ['controller' => 'Taes', 'action' => 'view', $extensao->tae->id]) : '' ?></td>
+                                <td><?= $extensao->has('docente') && !empty($extensao->docente->nome) ? $this->Html->link($extensao->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $extensao->docente->id]) : '' ?></td>
+                                <td><?= $extensao->has('tae') && !empty($extensao->tae->nome) ? $this->Html->link($extensao->tae->nome, ['controller' => 'Taes', 'action' => 'view', $extensao->tae->id]) : '' ?></td>
                                  <td><?= h($extensao->segmento) ?></td>
                                 <td><?= $this->Number->format($extensao->segmento_id, ['pattern' => '##']) ?></td>
                             <?php endif; ?>

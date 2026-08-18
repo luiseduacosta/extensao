@@ -25,7 +25,7 @@
 <div>
     <div class="container justify-content-left">
         <div class="col-auto">
-            <h3><?= h($extensao->titulo) ?></h3>
+            <h3><?= h($extensao->titulo ?? __('(sem título)')) ?></h3>
             <table aria-describedby='Atividades de extensão' class='table table-responsive table-hover'>
                 <tr>
                     <th><?= __('Id') ?></th>
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Título') ?></th>
-                    <td><?= h($extensao->titulo) ?></td>
+                    <td><?= h($extensao->titulo ?? '') ?></td>
                 </tr>
                 <?php if (isset($user) && $user->categoria == 1): ?>
                     <tr>
@@ -41,11 +41,11 @@
                         <?php
                         if (isset($user) && $user->categoria == 1):
                             ?>
-                            <td><?= $extensao->has('docente') ? $this->Html->link($extensao->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $extensao->docente->id]) : '' ?></td>
+                            <td><?= $extensao->has('docente') && !empty($extensao->docente->nome) ? $this->Html->link($extensao->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $extensao->docente->id]) : ($extensao->has('docente') ? h($extensao->docente->nome ?? '') : '') ?></td>
                             <?php
                         else:
                             ?>
-                            <td><?= $extensao->has('docente') ? $extensao->docente->nome : '' ?></td>
+                            <td><?= $extensao->has('docente') ? h($extensao->docente->nome ?? '') : '' ?></td>
                         <?php
                         endif;
                         ?>
@@ -55,11 +55,11 @@
                         <?php
                         if (isset($user) && $user->categoria == 1):
                             ?>
-                            <td><?= $extensao->has('tae') ? $this->Html->link($extensao->tae->nome, ['controller' => 'Taes', 'action' => 'view', $extensao->tae->id]) : '' ?></td>
+                            <td><?= $extensao->has('tae') && !empty($extensao->tae->nome) ? $this->Html->link($extensao->tae->nome, ['controller' => 'Taes', 'action' => 'view', $extensao->tae->id]) : ($extensao->has('tae') ? h($extensao->tae->nome ?? '') : '') ?></td>
                             <?php
                         else:
                             ?>
-                            <td><?= $extensao->has('tae') ? $extensao->tae->nome : '' ?></td>
+                            <td><?= $extensao->has('tae') ? h($extensao->tae->nome ?? '') : '' ?></td>
                         <?php
                         endif;
                         ?>
@@ -127,15 +127,26 @@
                                         <?php
                                         if (isset($user)):
                                             ?>
-                                            <td><?= $this->Html->link(h($extensionistas->estudante->nome), ['controller' => 'Extensionistas', 'action' => 'view', $extensionistas->id]) ?></td>
+                                            <td>
+                                                <?php
+                                                if ($extensionistas->has('estudante') && !empty($extensionistas->estudante->nome)):
+                                                    echo $this->Html->link(
+                                                        h($extensionistas->estudante->nome),
+                                                        ['controller' => 'Extensionistas', 'action' => 'view', $extensionistas->id]
+                                                    );
+                                                else:
+                                                    echo h($extensionistas->has('estudante') ? ($extensionistas->estudante->nome ?? '') : '');
+                                                endif;
+                                                ?>
+                                            </td>
                                             <?php
                                         else:
                                             ?>
-                                            <td><?= $extensionistas->estudante->nome ?></td>
+                                            <td><?= h($extensionistas->has('estudante') ? ($extensionistas->estudante->nome ?? '') : '') ?></td>
                                         <?php
                                         endif;
                                         ?>
-                                        <td><?= h($extensionistas->essextensao->titulo) ?></td>
+                                        <td><?= h($extensionistas->has('essextensao') ? ($extensionistas->essextensao->titulo ?? '') : '') ?></td>
                                         <?php
                                         if (isset($user)):
                                             ?>

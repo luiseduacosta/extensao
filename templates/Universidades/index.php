@@ -20,8 +20,8 @@
                 <?php foreach ($universidades as $universidade): ?>
                 <tr>
                     <td><?= $this->Number->format($universidade->id) ?></td>
-                    <td><?= $this->Html->link($universidade->universidade, ['controller' => 'universidades', 'action' => 'view', $universidade->id]) ?></td>
-                    <td><?= h($universidade->observacoes) ?></td>
+                    <td><?= $this->Html->link($universidade->universidade ?? __('(sem nome)'), ['controller' => 'universidades', 'action' => 'view', $universidade->id]) ?></td>
+                    <td><?= h($universidade->observacoes ?? '') ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

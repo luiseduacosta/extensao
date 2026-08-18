@@ -48,9 +48,9 @@ endif;
                     <tr>
                         <td><?= $this->Number->format($docente->id, ['pattern' => '#####']) ?></td>
                         <?php if ($user->categoria == 1): ?>
-                            <td><?= $this->Html->link(h($docente->nome), ['action' => 'view', $docente->id], ['class' => 'text-secondary']) ?></td>
+                            <td><?= $this->Html->link(h($docente->nome ?? __('(sem nome)')), ['action' => 'view', $docente->id], ['class' => 'text-secondary']) ?></td>
                         <?php else: ?>
-                            <td><?= h($docente->nome) ?></td>
+                            <td><?= h($docente->nome ?? '') ?></td>
                         <?php endif; ?>
                         <?php if ($user->categoria == 1): ?>
                             <td><?= h($docente->ddd_telefone) ?></td>

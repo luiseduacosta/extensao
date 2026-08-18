@@ -29,10 +29,10 @@ endif;
                 <?php foreach ($extensionistas as $extensionista): ?>
                     <tr>
                         <td><?= $this->Number->format($extensionista->id) ?></td>
-                        <td><?= $extensionista->has('estudante') ? $this->Html->link($extensionista->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $extensionista->estudante->id]) : '' ?></td>
-                        <td><?= $extensionista->has('extensao') ? $this->Html->link($extensionista->extensao->titulo, ['controller' => 'Extensoes', 'action' => 'view', $extensionista->extensao->id]) : '' ?></td>
-                        <td><?= h($extensionista->cargahoraria) ?></td>
-                        <td><?= h($extensionista->ano) ?></td>
+                        <td><?= $extensionista->has('estudante') && !empty($extensionista->estudante->nome) ? $this->Html->link($extensionista->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $extensionista->estudante->id]) : ($extensionista->has('estudante') ? h($extensionista->estudante->nome ?? '') : '') ?></td>
+                        <td><?= $extensionista->has('extensao') && !empty($extensionista->extensao->titulo) ? $this->Html->link($extensionista->extensao->titulo, ['controller' => 'Extensoes', 'action' => 'view', $extensionista->extensao->id]) : ($extensionista->has('extensao') ? h($extensionista->extensao->titulo ?? '') : '') ?></td>
+                        <td><?= h($extensionista->cargahoraria ?? '') ?></td>
+                        <td><?= h($extensionista->ano ?? '') ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('Ver'), ['action' => 'view', $extensionista->id]) ?>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $extensionista->id]) ?>

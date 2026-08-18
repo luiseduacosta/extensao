@@ -40,10 +40,10 @@
                 <?php foreach ($extensionista as $c_extensionista): ?>
                     <?php // pr($c_extensionista) ?>
                     <td><?= $this->Number->format($c_extensionista->id, ['pattern' => '####']) ?></td>
-                    <td><?= $c_extensionista->has('estudante') ? $this->Html->link($c_extensionista->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $c_extensionista->estudante->id]) : '' ?></td>
-                    <td><?= $c_extensionista->has('extensao') ? $this->Html->link($c_extensionista->extensao->titulo, ['controller' => 'Extensoes', 'action' => 'view', $c_extensionista->extensao->id, 'empty' => 'Seleciona']) : '' ?></td>
-                    <td><?= h($c_extensionista->cargahoraria) ?></td>
-                    <td><?= h($c_extensionista->ano) ?></td>
+                    <td><?= $c_extensionista->has('estudante') && !empty($c_extensionista->estudante->nome) ? $this->Html->link($c_extensionista->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $c_extensionista->estudante->id]) : ($c_extensionista->has('estudante') ? h($c_extensionista->estudante->nome ?? '') : '') ?></td>
+                    <td><?= $c_extensionista->has('extensao') && !empty($c_extensionista->extensao->titulo) ? $this->Html->link($c_extensionista->extensao->titulo, ['controller' => 'Extensoes', 'action' => 'view', $c_extensionista->extensao->id]) : ($c_extensionista->has('extensao') ? h($c_extensionista->extensao->titulo ?? '') : '') ?></td>
+                    <td><?= h($c_extensionista->cargahoraria ?? '') ?></td>
+                    <td><?= h($c_extensionista->ano ?? '') ?></td>
                     </tr>
                 <?php endforeach; ?>
             </table>

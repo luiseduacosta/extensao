@@ -18,7 +18,7 @@
 <div class="row">
     <div class="container justify-content-left">
         <div class='col-auto'>
-            <h3><?= h($extensao->titulo) ?></h3>
+            <h3><?= h($extensao->titulo ?? __('(sem título)')) ?></h3>
             <table aria-describedby='Atividade de extensão' class='table table-responsive table-hover'>
                 <tr>
                     <th><?= __('Id') ?></th>
@@ -26,27 +26,27 @@
                 </tr>
                 <tr>
                     <th><?= __('Título') ?></th>
-                    <td><?= h($extensao->titulo) ?></td>
+                    <td><?= h($extensao->titulo ?? '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Coordenação') ?></th>
-                    <td><?= h($extensao->coordenacao) ?></td>
+                    <td><?= h($extensao->coordenacao ?? '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Universidade') ?></th>
-                    <td><?= h($extensao->universidade->universidade) ?></td>
+                    <td><?= $extensao->has('universidade') ? h($extensao->universidade->universidade ?? '') : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Unidade') ?></th>
-                    <td><?= h($extensao->unidade) ?></td>
+                    <td><?= h($extensao->unidade ?? '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Extensão da ESS') ?></th>
-                    <td><?= $extensao->has('essextensao') ? $this->Html->link($extensao->essextensao->titulo, ['controller' => 'Essextensoes', 'action' => 'view', $extensao->essextensao->id]) : '' ?></td>
+                    <td><?= $extensao->has('essextensao') && !empty($extensao->essextensao->titulo) ? $this->Html->link($extensao->essextensao->titulo, ['controller' => 'Essextensoes', 'action' => 'view', $extensao->essextensao->id]) : ($extensao->has('essextensao') ? h($extensao->essextensao->titulo ?? '') : '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observações') ?></th>
-                    <td><?= h($extensao->observacoes) ?></td>
+                    <td><?= h($extensao->observacoes ?? '') ?></td>
                 </tr>
             </table>
             <div class="related">
@@ -63,9 +63,20 @@
                             <?php foreach ($extensao->extensionistas as $extensionistas) : ?>
                                 <tr>
                                     <td><?= h($extensionistas->id) ?></td>
-                                    <td><?= $this->Html->link($extensionistas->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $extensionistas->estudante->id]) ?></td>
-                                    <td><?= h($extensionistas->cargahoraria) ?></td>
-                                    <td><?= h($extensionistas->ano) ?></td>
+                                    <td>
+                                        <?php
+                                        if ($extensionistas->has('estudante') && !empty($extensionistas->estudante->nome) && !empty($extensionistas->estudante->id)):
+                                            echo $this->Html->link(
+                                                h($extensionistas->estudante->nome),
+                                                ['controller' => 'Estudantes', 'action' => 'view', $extensionistas->estudante->id]
+                                            );
+                                        else:
+                                            echo h($extensionistas->has('estudante') ? ($extensionistas->estudante->nome ?? '') : '');
+                                        endif;
+                                        ?>
+                                    </td>
+                                    <td><?= h($extensionistas->cargahoraria ?? '') ?></td>
+                                    <td><?= h($extensionistas->ano ?? '') ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>

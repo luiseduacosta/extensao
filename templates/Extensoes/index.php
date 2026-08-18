@@ -23,11 +23,11 @@
                 <?php foreach ($extensoes as $extensao): ?>
                     <tr>
                         <td><?= $this->Number->format($extensao->id) ?></td>
-                        <td><?= $this->Html->link(h($extensao->titulo), ['action' => 'view', $extensao->id]) ?></td>
-                        <td><?= h($extensao->coordenacao) ?></td>
-                        <td><?= h($extensao->unidade) ?></td>
-                        <td><?= $extensao->has('essextensao') ? $this->Html->link($extensao->essextensao->titulo, ['controller' => 'Essextensoes', 'action' => 'view', $extensao->essextensao->id]) : '' ?></td>
-                        <td><?= h($extensao->observacoes) ?></td>
+                        <td><?= $this->Html->link(h($extensao->titulo ?? __('(sem título)')), ['action' => 'view', $extensao->id]) ?></td>
+                        <td><?= h($extensao->coordenacao ?? '') ?></td>
+                        <td><?= h($extensao->unidade ?? '') ?></td>
+                        <td><?= $extensao->has('essextensao') && !empty($extensao->essextensao->titulo) ? $this->Html->link($extensao->essextensao->titulo, ['controller' => 'Essextensoes', 'action' => 'view', $extensao->essextensao->id]) : ($extensao->has('essextensao') ? h($extensao->essextensao->titulo ?? '') : '') ?></td>
+                        <td><?= h($extensao->observacoes ?? '') ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

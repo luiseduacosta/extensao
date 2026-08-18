@@ -31,10 +31,21 @@ endif;
                     <tr>
                         <td><?= $this->Number->format($euser->id, ['pattern' => '#####']) ?></td>
                         <td><?= $this->Number->format($euser->registro, ['pattern' => '#########']) ?></td>
-                        <td><?= $this->Html->link(h($euser->email), ['action' => 'view', $euser->id]) ?></td>
-                        <td><?= $this->Html->link(h($euser->estudante->nome), ['controller' => 'estudantes', 'action' => 'view', $euser->estudante->id]) ?></td>
-                        <td><?= h($euser->created) ?></td>
-                        <td><?= h($euser->modified) ?></td>
+                        <td><?= $this->Html->link(h($euser->email ?? ''), ['action' => 'view', $euser->id]) ?></td>
+                        <td>
+                            <?php
+                            if ($euser->has('estudante') && !empty($euser->estudante->nome) && !empty($euser->estudante->id)):
+                                echo $this->Html->link(
+                                    h($euser->estudante->nome),
+                                    ['controller' => 'estudantes', 'action' => 'view', $euser->estudante->id]
+                                );
+                            else:
+                                echo h($euser->has('estudante') ? ($euser->estudante->nome ?? '') : '');
+                            endif;
+                            ?>
+                        </td>
+                        <td><?= h($euser->created ?? '') ?></td>
+                        <td><?= h($euser->modified ?? '') ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
