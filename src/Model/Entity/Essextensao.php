@@ -20,11 +20,10 @@ use Cake\ORM\Entity;
  * @property string $tipo
  * @property string|null $observacoes
  *
- * @property \App\Model\Entity\Segmento $segmento
- * @property \App\Model\Entity\Docente $docente
- * @property \App\Model\Entity\Tae $tae
- * @property \App\Model\Entity\Situacaopr5 $situacaopr5
- * @property \App\Model\Entity\Extensionista[] $extensionistas
+ * @ * @property Docente $docente
+ * @property Tae $tae
+ * @property Situacaopr5 $situacaopr5
+ * @property Extensionista[] $extensionistas
  */
 class Essextensao extends Entity
 {

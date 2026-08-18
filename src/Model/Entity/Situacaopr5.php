@@ -11,8 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $situacao
  *
- * @property \App\Model\Entity\Extensao[] $extensao
- * @property \App\Model\Entity\Extensao[] $extensoes
+ * @property Essextensao[] $essextensoes
  */
 class Situacaopr5 extends Entity
 {

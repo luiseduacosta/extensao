@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Taes Model
  *
- * @property \App\Model\Table\ExtensaoTable&\Cake\ORM\Association\HasMany $Extensao
+ * @property \App\Model\Table\EssextensoesTable&\Cake\ORM\Association\HasMany $Essextensoes
  * @property \App\Model\Table\ExtensoesTable&\Cake\ORM\Association\HasMany $Extensoes
  *
  * @method \App\Model\Entity\Tae newEmptyEntity()
@@ -52,8 +52,8 @@ class TaesTable extends Table
     /**
      * Default validation rules.
      *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * @param Validator $validator Validator instance.
+     * @return Validator
      */
     public function validationDefault(Validator $validator): Validator
     {

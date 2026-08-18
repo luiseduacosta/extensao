@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property string $universidade
  * @property string $observacoes
  *
- * @property \App\Model\Entity\Extensao[] $extensoes
+ * @property Essextensao[] $essextensoes
  */
 class Universidade extends Entity
 {

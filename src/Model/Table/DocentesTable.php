@@ -11,11 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Docentes Model
  *
- * @property \App\Model\Table\EmentasTable&\Cake\ORM\Association\HasMany $Ementas
- * @property \App\Model\Table\ExtensaoTable&\Cake\ORM\Association\HasMany $Extensao
  * @property \App\Model\Table\ExtensoesTable&\Cake\ORM\Association\HasMany $Extensoes
- * @property \App\Model\Table\PlanejamentosTable&\Cake\ORM\Association\HasMany $Planejamentos
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\HasMany $Users
+ * @property \App\Model\Table\EssextensoesTable&\Cake\ORM\Association\HasMany $Essextensoes
  *
  * @method \App\Model\Entity\Docente newEmptyEntity()
  * @method \App\Model\Entity\Docente newEntity(array $data, array $options = [])
@@ -55,8 +52,8 @@ class DocentesTable extends Table
     /**
      * Default validation rules.
      *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * @param Validator $validator Validator instance.
+     * @return Validator
      */
     public function validationDefault(Validator $validator): Validator
     {

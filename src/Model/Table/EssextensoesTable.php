@@ -14,8 +14,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\DocentesTable&\Cake\ORM\Association\BelongsTo $Docentes
  * @property \App\Model\Table\TaesTable&\Cake\ORM\Association\BelongsTo $Taes
- * @property \App\Model\Table\SegmentosTable&\Cake\ORM\Association\BelongsTo $Segmentos
- * @property \App\Model\Table\Situacaopr5sTable&\Cake\ORM\Association\BelongsTo $Situacaopr5s
+// Removed invalid property reference to SegmentosTable as it was causing an unknown class error
+ * @property \App\Model\Table\Situacaopr5Table&\Cake\ORM\Association\BelongsTo $Situacaopr5
  * @property \App\Model\Table\ExtensionistasTable&\Cake\ORM\Association\HasMany $Extensionistas
  *
  * @method \App\Model\Entity\Extensao newEmptyEntity()
@@ -64,8 +64,8 @@ class EssextensoesTable extends Table {
     /**
      * Default validation rules.
      *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * @param Validator $validator Validator instance.
+     * @return Validator
      */
     public function validationDefault(Validator $validator): Validator {
         $validator
@@ -126,8 +126,8 @@ class EssextensoesTable extends Table {
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * @param RulesChecker $rules The rules object to be modified.
+     * @return RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->existsIn('docente_id', 'Docentes'), ['errorField' => 'docente_id']);

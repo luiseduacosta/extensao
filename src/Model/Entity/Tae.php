@@ -12,8 +12,7 @@ use Cake\ORM\Entity;
  * @property int $siape
  * @property string $nome
  *
- * @property \App\Model\Entity\ExtensaoOld[] $extensao_old
- * @property \App\Model\Entity\Extensao[] $extensoes
+ * @property Essextensao[] $essextensoes
  */
 class Tae extends Entity
 {
