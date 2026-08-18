@@ -1,0 +1,20 @@
+*Para utilizar outra tabela de autenticação que não seja Users*
+
+in src/Application.php
+
+In the getAuthenticationService function
+
+use the resolver option as an array such as
+
+$authenticationService->loadIdentifier(‘Authentication.Password’, [
+‘resolver’ => [
+‘className’ => ‘Authentication.Orm’,
+‘userModel’ => ‘yourtablename’,
+],
+‘fields’ => [
+‘username’ => ‘email’,
+‘password’ => ‘password’,
+],
+
+]);
+
