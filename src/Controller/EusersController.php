@@ -86,8 +86,8 @@ class EusersController extends AppController
      */
     public function index()
     {
-
-        $eusers = $this->paginate($this->Eusers, ['contain' => 'Estudantes']);
+        $query = $this->Eusers->find()->contain(['Estudantes']);
+        $eusers = $this->paginate($query);
 
         $this->set(compact('eusers'));
     }

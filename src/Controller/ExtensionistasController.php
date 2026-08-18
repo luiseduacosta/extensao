@@ -26,12 +26,12 @@ class ExtensionistasController extends AppController {
             endif;
         }
 
+        $query = $this->Extensionistas->find()->contain(['Estudantes', 'Extensoes' => ['Essextensoes']]);
         $this->paginate = [
-            'contain' => ['Estudantes', 'Extensoes' => ['Essextensoes']],
+            'order' => ['Estudantes.nome' => 'asc'],
+            'sortableFields' => ['id', 'Extensoes.titulo', 'cargahoraria', 'ano', 'Estudantes.nome'],
         ];
-        $this->paginate['order'] = ['Estudantes.nome' => 'asc'];
-        $this->paginate['sortableFields'] = ['id', 'Extensoes.titulo', 'cargahoraria', 'ano', 'Estudantes.nome'];
-        $extensionistas = $this->paginate($this->Extensionistas);
+        $extensionistas = $this->paginate($query);
 
         $this->set(compact('extensionistas'));
     }

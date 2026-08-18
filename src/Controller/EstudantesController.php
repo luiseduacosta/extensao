@@ -26,14 +26,13 @@ class EstudantesController extends AppController {
                 return $this->redirect(['controller' => 'Estudantes', 'action' => 'view', $this->Authentication->getIdentity()->estudante_id]);
             endif;
         }
-        $alunos = $this->Estudantes->find('all')
-                ->where(['concat("20", substring(Estudantes.registro, -8, 2)) >' => '2019'])
-                ->orderBy(['nome' => 'asc']);
-        // pr($alunos->toArray());
-        // die();
-        $this->paginate['where'] = ['concat("20", substring(Estudantes.registro, -8, 2)) >' => '2019'];
-        $this->paginate['order'] = ['nome' => 'asc'];
-        $estudantes = $this->paginate($this->Estudantes);
+        $query = $this->Estudantes->find()
+                ->where(['concat("20", substring(Estudantes.registro, -8, 2)) >' => '2019']);
+        
+        $this->paginate = [
+            'order' => ['nome' => 'asc'],
+        ];
+        $estudantes = $this->paginate($query);
 
         $this->set(compact('estudantes'));
     }

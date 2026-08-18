@@ -18,10 +18,8 @@ class ExtensoesController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Essextensoes', 'Universidades'],
-        ];
-        $extensoes = $this->paginate($this->Extensoes);
+        $query = $this->Extensoes->find()->contain(['Essextensoes', 'Universidades']);
+        $extensoes = $this->paginate($query);
 
         $this->set(compact('extensoes'));
     }

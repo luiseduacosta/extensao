@@ -18,12 +18,12 @@ class EssextensoesController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
+        $query = $this->Essextensoes->find()->contain(['Docentes', 'Taes', 'Situacaopr5']);
         $this->paginate = [
-            'contain' => ['Docentes', 'Taes', 'Situacaopr5'],
+            'order' => ['Essextensoes.titulo' => 'asc'],
+            'sortableFields' => ['Essextensoes.id', 'Essextensoes.titulo', 'Docentes.nome', 'Taes.nome', 'Essextensoes.segmento', 'Essextensoes.nome', 'Essextensoes.datacongregacao', 'Situacaopr5.situacao', 'Essextensoes.versao'],
         ];
-        $this->paginate['order'] = ['Essextensoes.titulo' => 'asc'];
-        $this->paginate['sortableFields'] = ['Essextensoes.id', 'Essextensoes.titulo', 'Docentes.nome', 'Taes.nome', 'Essextensoes.segmento', 'Essextensoes.nome', 'Essextensoes.datacongregacao', 'Situacaopr5.situacao', 'Essextensoes.versao'];
-        $essextensoes = $this->paginate($this->Essextensoes);
+        $essextensoes = $this->paginate($query);
 
         $this->set(compact('essextensoes'));
     }
