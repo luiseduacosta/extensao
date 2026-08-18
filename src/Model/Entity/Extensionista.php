@@ -28,7 +28,7 @@ class Extensionista extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'estudante_id' => true,
         'extensoes_id' => true,
         'essextensoes_id' => true,

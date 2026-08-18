@@ -101,9 +101,7 @@ class EusersController extends AppController
      */
     public function view($id = null)
     {
-        $euser = $this->Eusers->get($id, [
-            'contain' => [],
-        ]);
+        $euser = $this->Eusers->get($id, contain: []);
 
         $this->set(compact('euser'));
     }
@@ -142,9 +140,7 @@ class EusersController extends AppController
      */
     public function edit($id = null)
     {
-        $euser = $this->Eusers->get($id, [
-            'contain' => [],
-        ]);
+        $euser = $this->Eusers->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $euser = $this->Eusers->patchEntity($euser, $this->request->getData());
             if ($this->Eusers->save($euser)) {

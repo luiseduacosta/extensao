@@ -32,9 +32,7 @@ class InformacoesController extends AppController
      */
     public function view($id = null)
     {
-        $informacao = $this->Informacoes->get($id, [
-            'contain' => [],
-        ]);
+        $informacao = $this->Informacoes->get($id, contain: []);
 
         $this->set(compact('informacao'));
     }
@@ -69,9 +67,7 @@ class InformacoesController extends AppController
      */
     public function edit($id = null)
     {
-        $informacao = $this->Informacoes->get($id, [
-            'contain' => [],
-        ]);
+        $informacao = $this->Informacoes->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $informacao = $this->Informacoes->patchEntity($informacao, $this->request->getData());
             if ($this->Informacoes->save($informacao)) {

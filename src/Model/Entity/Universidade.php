@@ -25,7 +25,7 @@ class Universidade extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'universidade' => true,
         'observacoes' => true,
         'extensoes' => true,

@@ -30,6 +30,8 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'paths.php';
  */
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
+require CAKE . 'functions.php';
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
@@ -124,19 +126,13 @@ ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
 /*
  * Register application error and exception handlers.
  */
-$isCli = PHP_SAPI === 'cli';
-if ($isCli) {
-    // (new ConsoleErrorHandler(Configure::read('Error')))->register();
-    (new ErrorTrap(Configure::read('Error')))->register();
-} else {
-    // (new ErrorHandler(Configure::read('Error')))->register();
-    (new ExceptionTrap(Configure::read('Error')))->register();
-}
+(new ErrorTrap(Configure::read('Error')))->register();
+(new ExceptionTrap(Configure::read('Error')))->register();
 
 /*
  * Include the CLI bootstrap overrides.
  */
-if ($isCli) {
+if (PHP_SAPI === 'cli') {
     require CONFIG . 'bootstrap_cli.php';
 }
 
@@ -240,5 +236,5 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
 \Cake\I18n\Time::setToStringFormat('HH:mm:ss');
 \Cake\I18n\Date::setToStringFormat('dd/MM/yyyy');
-\Cake\I18n\FrozenTime::setToStringFormat('HH:mm:ss');
-\Cake\I18n\FrozenDate::setToStringFormat('dd/MM/yyyy');
+\Cake\I18n\DateTime::setToStringFormat('HH:mm:ss');
+\Cake\I18n\Date::setToStringFormat('dd/MM/yyyy');

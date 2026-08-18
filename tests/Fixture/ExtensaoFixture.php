@@ -15,7 +15,7 @@ class ExtensaoFixture extends TestFixture
      *
      * @var string
      */
-    public $table = 'extensao';
+    public string $table = 'extensao';
     /**
      * Init method
      *

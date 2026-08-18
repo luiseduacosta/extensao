@@ -21,7 +21,7 @@ class ExtensionistasControllerTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'app.Extensionistas',
         'app.Alunosnovos',
         'app.Extensoes',

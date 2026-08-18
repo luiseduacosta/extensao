@@ -33,9 +33,7 @@ class DocentesController extends AppController
      */
     public function view($id = null)
     {
-        $docente = $this->Docentes->get($id, [
-            'contain' => ['Essextensoes'],
-        ]);
+        $docente = $this->Docentes->get($id, contain: ['Essextensoes']);
 
         $this->set(compact('docente'));
     }
@@ -69,9 +67,7 @@ class DocentesController extends AppController
      */
     public function edit($id = null)
     {
-        $docente = $this->Docentes->get($id, [
-            'contain' => [],
-        ]);
+        $docente = $this->Docentes->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $docente = $this->Docentes->patchEntity($docente, $this->request->getData());
             if ($this->Docentes->save($docente)) {

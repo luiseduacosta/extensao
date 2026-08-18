@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property int|null $tae_id
  * @property int $segmento_id
  * @property string|null $nome
- * @property \Cake\I18n\FrozenDate|null $datacongregacao
+ * @property \Cake\I18n\Date|null $datacongregacao
  * @property int|null $situacaopr5_id
  * @property int|null $versao
  * @property string $tipo
@@ -37,7 +37,7 @@ class Essextensao extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'titulo' => true,
         'docente_id' => true,
         'tae_id' => true,

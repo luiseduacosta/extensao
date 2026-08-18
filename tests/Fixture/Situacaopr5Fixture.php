@@ -15,7 +15,7 @@ class Situacaopr5Fixture extends TestFixture
      *
      * @var string
      */
-    public $table = 'situacaopr5';
+    public string $table = 'situacaopr5';
     /**
      * Init method
      *

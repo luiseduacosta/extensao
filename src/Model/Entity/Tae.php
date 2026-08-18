@@ -26,7 +26,7 @@ class Tae extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'siape' => true,
         'nome' => true,
         'essextensoes' => true,

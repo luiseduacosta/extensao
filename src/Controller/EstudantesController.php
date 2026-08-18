@@ -28,7 +28,7 @@ class EstudantesController extends AppController {
         }
         $alunos = $this->Estudantes->find('all')
                 ->where(['concat("20", substring(Estudantes.registro, -8, 2)) >' => '2019'])
-                ->order(['nome' => 'asc']);
+                ->orderBy(['nome' => 'asc']);
         // pr($alunos->toArray());
         // die();
         $this->paginate['where'] = ['concat("20", substring(Estudantes.registro, -8, 2)) >' => '2019'];
@@ -52,9 +52,7 @@ class EstudantesController extends AppController {
             return $this->redirect(['controller' => 'estudantes', 'action' => 'index']);
         }
 
-        $estudante = $this->Estudantes->get($id, [
-            'contain' => ['Extensionistas' => 'Extensoes'],
-        ]);
+        $estudante = $this->Estudantes->get($id, contain: ['Extensionistas' => 'Extensoes']);
 
         $this->set(compact('estudante'));
     }
@@ -137,9 +135,7 @@ class EstudantesController extends AppController {
 
         $user = $this->Authentication->getIdentity();
 
-        $estudante = $this->Estudantes->get($id, [
-            'contain' => [],
-        ]);
+        $estudante = $this->Estudantes->get($id, contain: []);
 
         if ($user->categoria == 1):
         elseif ($user->categoria == 2):

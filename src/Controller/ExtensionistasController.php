@@ -138,9 +138,7 @@ class ExtensionistasController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null) {
-        $extensionista = $this->Extensionistas->get($id, [
-            'contain' => [],
-        ]);
+        $extensionista = $this->Extensionistas->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $extensionista = $this->Extensionistas->patchEntity($extensionista, $this->request->getData());
             if ($this->Extensionistas->save($extensionista)) {

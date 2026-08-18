@@ -29,7 +29,7 @@ class Extensao extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'titulo' => true,
         'coordenacao' => true,
         'universidade_id' => true,

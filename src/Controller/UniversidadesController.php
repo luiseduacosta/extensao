@@ -32,9 +32,7 @@ class UniversidadesController extends AppController
      */
     public function view($id = null)
     {
-        $universidade = $this->Universidades->get($id, [
-            'contain' => ['Extensoes' =>  'Essextensoes'],
-        ]);
+        $universidade = $this->Universidades->get($id, contain: ['Extensoes' =>  'Essextensoes']);
 
         $this->set(compact('universidade'));
     }
@@ -68,9 +66,7 @@ class UniversidadesController extends AppController
      */
     public function edit($id = null)
     {
-        $universidade = $this->Universidades->get($id, [
-            'contain' => [],
-        ]);
+        $universidade = $this->Universidades->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $universidade = $this->Universidades->patchEntity($universidade, $this->request->getData());
             if ($this->Universidades->save($universidade)) {

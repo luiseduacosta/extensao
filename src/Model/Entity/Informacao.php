@@ -24,7 +24,7 @@ class Informacao extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'cabecalho' => true,
         'corpo' => true,
         'pe' => true,

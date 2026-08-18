@@ -25,7 +25,7 @@ class Situacaopr5 extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'situacao' => true,
         'essextensoes' => true,
     ];

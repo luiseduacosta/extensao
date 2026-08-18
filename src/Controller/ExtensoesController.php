@@ -34,9 +34,7 @@ class ExtensoesController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $extensao = $this->Extensoes->get($id, [
-            'contain' => ['Extensionistas' => 'Estudantes', 'Essextensoes', 'Universidades'],
-        ]);
+        $extensao = $this->Extensoes->get($id, contain: ['Extensionistas' => 'Estudantes', 'Essextensoes', 'Universidades']);
 
         $this->set(compact('extensao'));
     }
@@ -50,7 +48,7 @@ class ExtensoesController extends AppController {
 
         $extensoes = $this->Extensoes->find();
         $extensoes->select(['titulo']);
-        $extensoes->order(['titulo']);
+        $extensoes->orderBy(['titulo']);
         $extensoes->all();
         // pr($extensoes);
         // die();
@@ -83,9 +81,7 @@ class ExtensoesController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null) {
-        $extensao = $this->Extensoes->get($id, [
-            'contain' => ['Essextensoes', 'Universidades'],
-        ]);
+        $extensao = $this->Extensoes->get($id, contain: ['Essextensoes', 'Universidades']);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $extensao = $this->Extensoes->patchEntity($extensao, $this->request->getData());
             if ($this->Extensoes->save($extensao)) {

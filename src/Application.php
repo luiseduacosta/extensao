@@ -53,7 +53,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function bootstrap(): void {
         // Call parent to load bootstrap from files.
         parent::bootstrap();
-                
+
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
         } else {
@@ -96,13 +96,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 // add Authentication after RoutingMiddleware
                 ->add(new AuthenticationMiddleware($this))
 
-                // Add routing middleware.
-                // If you have a large number of routes connected, turning on routes
-                // caching in production could improve performance. For that when
-                // creating the middleware instance specify the cache config name by
-                // using it's second constructor argument:
-                // `new RoutingMiddleware($this, '_cake_routes_')`
-                ->add(new RoutingMiddleware($this))
+
 
                 // Parse various types of encoded request bodies so that they are
                 // available as array through $request->getData()

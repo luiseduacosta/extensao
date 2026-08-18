@@ -33,9 +33,7 @@ class TaesController extends AppController
      */
     public function view($id = null)
     {
-        $tae = $this->Taes->get($id, [
-            'contain' => ['Essextensoes'],
-        ]);
+        $tae = $this->Taes->get($id, contain: ['Essextensoes']);
 
         $this->set(compact('tae'));
     }
@@ -69,9 +67,7 @@ class TaesController extends AppController
      */
     public function edit($id = null)
     {
-        $tae = $this->Taes->get($id, [
-            'contain' => [],
-        ]);
+        $tae = $this->Taes->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $tae = $this->Taes->patchEntity($tae, $this->request->getData());
             if ($this->Taes->save($tae)) {

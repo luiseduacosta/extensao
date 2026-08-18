@@ -23,7 +23,7 @@ class ExtensoesTableTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'app.Extensoes',
         'app.Extensionistas',
     ];
