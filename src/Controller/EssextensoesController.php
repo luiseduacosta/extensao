@@ -52,18 +52,20 @@ class EssextensoesController extends AppController {
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             if ($data['docente_id']):
-                $this->loadModel('Docentes');
+                $this->fetchTable('Docentes');
                 $nome = $this->Docentes->find();
                 $nome->where(['Docentes.id' => $data['docente_id']]);
-                $docente = $nome->first()->nome;
+                $docenteEntity = $nome->first();
+                $docente = $docenteEntity?->nome;
                 $data['segmento'] = 'docente';
                 $data['segmento_id'] = $data['docente_id'];
                 $data['nome'] = $docente;
             elseif ($data['tae_id']):
-                $this->loadModel('Taes');
+                $this->fetchTable('Taes');
                 $nome = $this->Taes->find();
                 $nome->where(['Taes.id' => $data['tae_id']]);
-                $tae = $nome->first()->nome;
+                $taeEntity = $nome->first();
+                $tae = $taeEntity?->nome;
                 $data['segmento'] = 'tae';
                 $data['segmento_id'] = $data['tae_id'];
                 $data['nome'] = $tae;
@@ -78,7 +80,6 @@ class EssextensoesController extends AppController {
         }
         $docentes = $this->Essextensoes->Docentes->find('list', ['limit' => 200])->all();
         $taes = $this->Essextensoes->Taes->find('list', ['limit' => 200])->all();
-        // $segmentos = $this->Extensoes->Segmentos->find('list', ['limit' => 200])->all();
         $situacaopr5s = $this->Essextensoes->Situacaopr5->find('list', ['limit' => 200])->all();
         $this->set(compact('essextensao', 'docentes', 'taes', 'situacaopr5s'));
     }
@@ -98,18 +99,20 @@ class EssextensoesController extends AppController {
 
             $data = $this->request->getData();
             if ($data['docente_id']):
-                $this->loadModel('Docentes');
+                $this->fetchTable('Docentes');
                 $nome = $this->Docentes->find();
                 $nome->where(['Docentes.id' => $data['docente_id']]);
-                $docente = $nome->first()->nome;
+                $docenteEntity = $nome->first();
+                $docente = $docenteEntity?->nome;
                 $data['segmento'] = 'docente';
                 $data['segmento_id'] = $data['docente_id'];
                 $data['nome'] = $docente;
             elseif ($data['tae_id']):
-                $this->loadModel('Taes');
+                $this->fetchTable('Taes');
                 $nome = $this->Taes->find();
                 $nome->where(['Taes.id' => $data['tae_id']]);
-                $tae = $nome->first()->nome;
+                $taeEntity = $nome->first();
+                $tae = $taeEntity?->nome;
                 $data['segmento'] = 'tae';
                 $data['segmento_id'] = $data['tae_id'];
                 $data['nome'] = $tae;
@@ -125,7 +128,6 @@ class EssextensoesController extends AppController {
         }
         $docentes = $this->Essextensoes->Docentes->find('list', ['limit' => 250])->all();
         $taes = $this->Essextensoes->Taes->find('list', ['limit' => 200])->all();
-        // $segmentos = $this->Essextensoes->Segmentos->find('list', ['limit' => 200])->all();
         $situacaopr5s = $this->Essextensoes->Situacaopr5->find('list', ['limit' => 5])->all();
         $this->set(compact('extensao', 'docentes', 'taes', 'situacaopr5s'));
     }

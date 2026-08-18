@@ -96,8 +96,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 // add Authentication after RoutingMiddleware
                 ->add(new AuthenticationMiddleware($this))
 
-
-
                 // Parse various types of encoded request bodies so that they are
                 // available as array through $request->getData()
                 // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
@@ -118,21 +116,22 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             'queryParam' => 'redirect',
         ]);
 
-        // Load identifiers, ensure we check email and password fields
-        $authenticationService->loadIdentifier('Authentication.Password', [
-            'resolver' => [
-                'className' => 'Authentication.Orm',
-                'userModel' => 'Eusers'
-            ],
-            'fields' => [
-                'username' => 'email',
-                'password' => 'password',
+        $identifierConfig = [
+            'Authentication.Password' => [
+                'resolver' => [
+                    'className' => 'Authentication.Orm',
+                    'userModel' => 'Eusers'
+                ],
+                'fields' => [
+                    'username' => 'email',
+                    'password' => 'password',
+                ]
             ]
-        ]);
+        ];
 
-        // Load the authenticators, you want session first
-        $authenticationService->loadAuthenticator('Authentication.Session');
-        // Configure form data check to pick email and password
+        $authenticationService->loadAuthenticator('Authentication.Session', [
+            'identifier' => $identifierConfig,
+        ]);
         $authenticationService->loadAuthenticator('Authentication.Form', [
             'fields' => [
                 'username' => 'email',

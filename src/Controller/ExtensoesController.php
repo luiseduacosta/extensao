@@ -48,13 +48,9 @@ class ExtensoesController extends AppController {
         $extensoes->select(['titulo']);
         $extensoes->orderBy(['titulo']);
         $extensoes->all();
-        // pr($extensoes);
-        // die();
         $universidades = $this->Extensoes->Universidades->find('list');
-        $universidades->order(['universidade']);
+        $universidades->orderBy(['universidade']);
         $universidades->all();
-        // pr($universidades);
-        // die();
 
         $extensao = $this->Extensoes->newEmptyEntity();
 
@@ -90,14 +86,12 @@ class ExtensoesController extends AppController {
         }
 
         $essextensoes = $this->Extensoes->Essextensoes->find('list');
-        $essextensoes->order(['titulo']);
+        $essextensoes->orderBy(['titulo']);
         $essextensoes->all();
 
         $universidades = $this->Extensoes->Universidades->find('list');
-        $universidades->order(['universidade']);
+        $universidades->orderBy(['universidade']);
         $universidades->all();
-        // pr($universidades);
-        // die();
 
         $this->set(compact('extensao', 'essextensoes', 'universidades'));
     }

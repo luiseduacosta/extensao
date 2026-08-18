@@ -64,34 +64,30 @@ class EstudantesController extends AppController {
     public function add($id = null) {
 
         $registro = $this->request->getQuery('registro');
-        // die($registro);
         if ($registro):
             $query_estudante = $this->Estudantes->find();
             $query_estudante->where(['Estudantes.registro' => $registro]);
-            if (isset($query_estudante->first()->registro)):
-                // echo 'Estudante já cadastrado' . '<br>';
-                $this->loadModel('Eusers');
-                $user = $this->Eusers->find();
-                $user->where(['Eusers.registro' => $registro]);
-                if ($user):
-                    $usuario = $user->first()->toArray();
+            $estudante_reg = $query_estudante->first();
+            if ($estudante_reg && isset($estudante_reg->registro)):
+                $this->fetchTable('Eusers');
+                $userQuery = $this->Eusers->find();
+                $userQuery->where(['Eusers.registro' => $registro]);
+                $userEntity = $userQuery->first();
+                if ($userEntity):
+                    $usuario = $userEntity->toArray();
+                    if (empty($usuario['estudante_id'])):
+                        $usuario['estudante_id'] = $estudante_reg->id;
+                        $usuario = $this->Eusers->patchEntity($userEntity, $usuario);
+                        if ($this->Eusers->save($usuario)):
+                            return $this->redirect(['action' => 'view', $usuario['estudante_id']]);
+                        else:
+                            $this->Flash->error(__('Não foi possível atualizar o Estudante com o Usuário.'));
+                        endif;
+                    endif;
                 else:
                     $this->Flash->error(__('Usuário não cadastrado.'));
-                    echo "Usuário não cadastrado" . "<br>";
-                endif;
-                if (empty($usuario['estudante_id'])):
-                    // echo "Sem estudante_id" . "<br>";
-                    $usuario['estudante_id'] = $query_estudante->first()->id;
-                    $usuario = $this->Eusers->patchEntity($user->first(), $usuario);
-                    if ($this->Eusers->save($usuario)):
-                        return $this->redirect(['action' => 'view', $usuario['estudante_id']]);
-                    else:
-                        $this->Flash->error(__('Não foi possível atualizar o Estudante com o Usuário.'));
-                        die('Error');
-                    endif;
                 endif;
             else:
-                // echo 'Não cadastrado. Envio o registro para o formulário' . "<br>";
                 $registro = null;
                 $this->set('registro', $registro);
             endif;
@@ -103,22 +99,25 @@ class EstudantesController extends AppController {
             if ($this->Estudantes->save($estudante)) {
                 $this->Flash->success(__('Estudante cadastrado.'));
 
-                /* Inserir o id do estudante na tabela Eusers */
-                $this->loadModel('Eusers');
+                $this->fetchTable('Eusers');
                 $query_user = $this->Eusers->find();
                 $query_user->where(['Eusers.registro' => $estudante->registro]);
-                $usuario = $query_user->first()->toArray();
-                $usuario['estudante_id'] = $estudante->id;
-                pr($user->first());
-                $usuario = $this->Eusers->patchEntity($user->first(), $usuario);
-                if ($this->Eusers->save($usuario)):
-                    return $this->redirect(['action' => 'view', $usuario['estudante_id']]);
+                $userEntity = $query_user->first();
+                if ($userEntity):
+                    $usuario = $userEntity->toArray();
+                    $usuario['estudante_id'] = $estudante->id;
+                    $usuario = $this->Eusers->patchEntity($userEntity, $usuario);
+                    if ($this->Eusers->save($usuario)):
+                        return $this->redirect(['action' => 'view', $usuario['estudante_id']]);
+                    else:
+                        $this->Flash->error(__('Não foi possível atualizar o Usuário com o Estudante.'));
+                    endif;
                 else:
-                    $this->Flash->error(__('Não foi possível atualizar o Usuário com o Estudante.'));
-                    die('Error');
+                    $this->Flash->error(__('Não foi possível localizar o Usuário para vincular ao Estudante.'));
                 endif;
+            } else {
+                $this->Flash->error(__('Não foi possível completar o cadastro. Tente novamente.'));
             }
-            $this->Flash->error(__('Não foi possível completar o cadastro. Tente novamente.'));
         }
         $this->set(compact('estudante'));
     }
