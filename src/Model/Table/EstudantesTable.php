@@ -37,7 +37,7 @@ class EstudantesTable extends Table {
     public function initialize(array $config): void {
         parent::initialize($config);
 
-        $this->setTable('alunosnovos');
+        $this->setTable('alunos');
         $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
 
