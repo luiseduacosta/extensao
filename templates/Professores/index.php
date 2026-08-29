@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Docente[]|\Cake\Collection\CollectionInterface $docentes
+ * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professores
  */
 $user = $this->request->getAttribute('identity');
 if (!isset($user)):
@@ -14,7 +14,7 @@ endif;
     <?php if ($user->categoria == 1): ?>
         <?= $this->Html->link(__('Inserir'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
     <?php endif; ?>
-    <h3><?= __('Docentes') ?></h3>
+    <h3><?= __('Professores') ?></h3>
     <div class="row">
         <table class="table table-responsive table-hover">
             <thead class="thead-light">
@@ -22,18 +22,19 @@ endif;
                     <th><?= $this->Paginator->sort('id', "<span class=text-secondary>Id</span>", ['escape' => false]) ?></th>
                     <th><?= $this->Paginator->sort('nome', '<span class = text-secondary>Nome</span>', ['escape' => false]) ?></th>
                     <?php if ($user->categoria == 1): ?>
-                        <th><?= $this->Paginator->sort('ddd_telefone', ['DDD']) ?></th>
+                        <th><?= $this->Paginator->sort('cpf', ['CPF']) ?></th>
+                        <th><?= $this->Paginator->sort('siape', ['Siape']) ?></th>
+                        <th><?= $this->Paginator->sort('cress', ['Cress']) ?></th>
+                        <th><?= $this->Paginator->sort('regiao', ['Região']) ?></th>
+                        <th><?= $this->Paginator->sort('codigo_telefone', ['Cód. Telefone']) ?></th>
                         <th><?= $this->Paginator->sort('telefone') ?></th>
-                        <th><?= $this->Paginator->sort('ddd_celular', ['DDD']) ?></th>
+                        <th><?= $this->Paginator->sort('codigo_celular', ['Cód. Celular']) ?></th>
                         <th><?= $this->Paginator->sort('celular') ?></th>
                         <th><?= $this->Paginator->sort('email') ?></th>
                         <th><?= $this->Paginator->sort('curriculolattes', ['Currículo lattes']) ?></th>
                         <th><?= $this->Paginator->sort('atualizacaolattes', ['Atualização lattes']) ?></th>
                         <th><?= $this->Paginator->sort('dataingresso', ['Data de ingresso']) ?></th>
-                        <th><?= $this->Paginator->sort('formaingresso', ['Forma de ingresso']) ?></th>
-                        <th><?= $this->Paginator->sort('tipocargo', ['Tipo de cargo']) ?></th>
-                        <th><?= $this->Paginator->sort('categoria', ['Categoria']) ?></th>
-                        <th><?= $this->Paginator->sort('regimetrabalho', ['Regime de trabalho']) ?></th>
+                        <th><?= $this->Paginator->sort('status', ['Status']) ?></th>
                     <?php endif; ?>
                     <th><?= $this->Paginator->sort('departamento', ['Departamento']) ?></th>
                     <th><?= $this->Paginator->sort('dataegresso', ['Data de egresso']) ?></th>
@@ -44,36 +45,37 @@ endif;
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($docentes as $docente): ?>
+                <?php foreach ($professores as $professor): ?>
                     <tr>
-                        <td><?= $this->Number->format($docente->id, ['pattern' => '#####']) ?></td>
+                        <td><?= $this->Number->format($professor->id, ['pattern' => '#####']) ?></td>
                         <?php if ($user->categoria == 1): ?>
-                            <td><?= $this->Html->link(h($docente->nome ?? __('(sem nome)')), ['action' => 'view', $docente->id], ['class' => 'text-secondary']) ?></td>
+                            <td><?= $this->Html->link(h($professor->nome), ['action' => 'view', $professor->id], ['class' => 'text-secondary']) ?></td>
                         <?php else: ?>
-                            <td><?= h($docente->nome ?? '') ?></td>
+                            <td><?= h($professor->nome) ?></td>
                         <?php endif; ?>
                         <?php if ($user->categoria == 1): ?>
-                            <td><?= h($docente->ddd_telefone) ?></td>
-                            <td><?= h($docente->telefone) ?></td>
-                            <td><?= h($docente->ddd_celular) ?></td>
-                            <td><?= h($docente->celular) ?></td>
-                            <td><?= h($docente->email) ?></td>
-                            <td><?= h($docente->curriculolattes) ?></td>
-                            <td><?= h($docente->atualizacaolattes) ?></td>
-                            <td><?= h($docente->dataingresso) ?></td>
-                            <td><?= h($docente->formaingresso) ?></td>
-                            <td><?= h($docente->tipocargo) ?></td>
-                            <td><?= h($docente->categoria) ?></td>
-                            <td><?= h($docente->regimetrabalho) ?></td>
+                            <td><?= h($professor->cpf) ?></td>
+                            <td><?= $professor->siape === null ? '' : $this->Number->format($professor->siape) ?></td>
+                            <td><?= h($professor->cress) ?></td>
+                            <td><?= h($professor->regiao) ?></td>
+                            <td><?= h($professor->codigo_telefone) ?></td>
+                            <td><?= h($professor->telefone) ?></td>
+                            <td><?= h($professor->codigo_celular) ?></td>
+                            <td><?= h($professor->celular) ?></td>
+                            <td><?= h($professor->email) ?></td>
+                            <td><?= h($professor->curriculolattes) ?></td>
+                            <td><?= h($professor->atualizacaolattes) ?></td>
+                            <td><?= h($professor->dataingresso) ?></td>
+                            <td><?= h($professor->status) ?></td>
                         <?php endif; ?>
-                        <td><?= h($docente->departamento) ?></td>
-                        <td><?= h($docente->dataegresso) ?></td>
-                        <td><?= h($docente->motivoegresso) ?></td>
+                        <td><?= h($professor->departamento) ?></td>
+                        <td><?= h($professor->dataegresso) ?></td>
+                        <td><?= h($professor->motivoegresso) ?></td>
                         <?php if ($user->categoria == 1): ?>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['action' => 'view', $docente->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $docente->id]) ?>
-                                <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $docente->id], ['confirm' => __('Are you sure you want to delete # {0}?', $docente->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['action' => 'view', $professor->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $professor->id]) ?>
+                                <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id)]) ?>
                             </td>
                         <?php endif; ?>
                     </tr>

@@ -22,7 +22,7 @@ endif;
                     <th><?= $this->Paginator->sort('Essextensoes.id', ['Id']) ?></th>
                     <th><?= $this->Paginator->sort('Essextensoes.titulo', ['Título']) ?></th>
                     <?php if (isset($user) && $user->categoria == 1): ?>
-                        <th><?= $this->Paginator->sort('Docentes.nome', ['Docente']) ?></th>
+                        <th><?= $this->Paginator->sort('Professores.nome', ['Professor']) ?></th>
                         <th><?= $this->Paginator->sort('Taes.nome', ['Tae']) ?></th>
                         <th><?= $this->Paginator->sort('Essextensoes.segmento', ['Segmento']) ?></th>
                         <th><?= $this->Paginator->sort('Essextensoes.segmento_id', ['Seg. Id']) ?></th>
@@ -44,7 +44,7 @@ endif;
 
                         <?php if (isset($user)): ?>
                             <?php if ($user->categoria == 1): ?>
-                                <td><?= $extensao->has('docente') && !empty($extensao->docente->nome) ? $this->Html->link($extensao->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $extensao->docente->id]) : '' ?></td>
+                                <td><?= $extensao->has('professor') && !empty($extensao->professor->nome) ? $this->Html->link($extensao->professor->nome, ['controller' => 'Professores', 'action' => 'view', $extensao->professor->id]) : '' ?></td>
                                 <td><?= $extensao->has('tae') && !empty($extensao->tae->nome) ? $this->Html->link($extensao->tae->nome, ['controller' => 'Taes', 'action' => 'view', $extensao->tae->id]) : '' ?></td>
                                  <td><?= h($extensao->segmento) ?></td>
                                 <td><?= $this->Number->format($extensao->segmento_id, ['pattern' => '##']) ?></td>

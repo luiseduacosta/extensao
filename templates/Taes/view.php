@@ -39,7 +39,7 @@
                             <tr>
                                 <th><?= __('Id') ?></th>
                                 <th><?= __('Titulo') ?></th>
-                                <th><?= __('Docente') ?></th>
+                                <th><?= __('Professor') ?></th>
                                 <th><?= __('Tae') ?></th>
                                 <th><?= __('Segmento') ?></th>
                                 <th><?= __('Segmento Id') ?></th>

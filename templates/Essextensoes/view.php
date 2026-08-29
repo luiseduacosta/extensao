@@ -37,15 +37,15 @@
                 </tr>
                 <?php if (isset($user) && $user->categoria == 1): ?>
                     <tr>
-                        <th><?= __('Docente') ?></th>
+                        <th><?= __('Professor') ?></th>
                         <?php
                         if (isset($user) && $user->categoria == 1):
                             ?>
-                            <td><?= $extensao->has('docente') && !empty($extensao->docente->nome) ? $this->Html->link($extensao->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $extensao->docente->id]) : ($extensao->has('docente') ? h($extensao->docente->nome ?? '') : '') ?></td>
+                            <td><?= $extensao->has('professor') && !empty($extensao->professor->nome) ? $this->Html->link($extensao->professor->nome, ['controller' => 'Professores', 'action' => 'view', $extensao->professor->id]) : ($extensao->has('professor') ? h($extensao->professor->nome ?? '') : '') ?></td>
                             <?php
                         else:
                             ?>
-                            <td><?= $extensao->has('docente') ? h($extensao->docente->nome ?? '') : '' ?></td>
+                            <td><?= $extensao->has('professor') ? h($extensao->professor->nome ?? '') : '' ?></td>
                         <?php
                         endif;
                         ?>

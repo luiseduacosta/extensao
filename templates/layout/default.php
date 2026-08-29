@@ -67,7 +67,7 @@ $cakeDescription = 'Coordenação de extensão da ESS/UFRJ';
                         <?= $this->Html->link('Universidades', ['controller' => 'universidades', 'action' => 'index'], ['class' => 'nav-link']); ?>
                     </li>
                     <li class="nav-item">
-                        <?= $this->Html->link('Docentes', ['controller' => 'docentes', 'action' => 'index'], ['class' => 'nav-link']); ?>
+                        <?= $this->Html->link('Professores', ['controller' => 'professores', 'action' => 'index'], ['class' => 'nav-link']); ?>
                     </li>
                     <li class="nav-item">
                         <?= $this->Html->link('Técnicos', ['controller' => 'taes', 'action' => 'index'], ['class' => 'nav-link']); ?>

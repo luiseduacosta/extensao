@@ -18,10 +18,10 @@ class EssextensoesController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        $query = $this->Essextensoes->find()->contain(['Docentes', 'Taes', 'Situacaopr5']);
+        $query = $this->Essextensoes->find()->contain(['Professores', 'Taes', 'Situacaopr5']);
         $this->paginate = [
             'order' => ['Essextensoes.titulo' => 'asc'],
-            'sortableFields' => ['Essextensoes.id', 'Essextensoes.titulo', 'Docentes.nome', 'Taes.nome', 'Essextensoes.segmento', 'Essextensoes.nome', 'Essextensoes.datacongregacao', 'Situacaopr5.situacao', 'Essextensoes.versao'],
+            'sortableFields' => ['Essextensoes.id', 'Essextensoes.titulo', 'Professores.nome', 'Taes.nome', 'Essextensoes.segmento', 'Essextensoes.nome', 'Essextensoes.datacongregacao', 'Situacaopr5.situacao', 'Essextensoes.versao'],
         ];
         $essextensoes = $this->paginate($query);
 
@@ -37,7 +37,7 @@ class EssextensoesController extends AppController {
      */
     public function view($id = null) {
         $extensao = $this->Essextensoes->get($id, [
-            'contain' => ['Docentes', 'Taes', 'Extensionistas' => ['Estudantes'], 'Situacaopr5'],
+            'contain' => ['Professores', 'Taes', 'Extensionistas' => ['Estudantes'], 'Situacaopr5'],
         ]);
         $this->set(compact('extensao'));
     }
@@ -52,14 +52,14 @@ class EssextensoesController extends AppController {
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             if ($data['docente_id']):
-                $this->fetchTable('Docentes');
-                $nome = $this->Docentes->find();
-                $nome->where(['Docentes.id' => $data['docente_id']]);
-                $docenteEntity = $nome->first();
-                $docente = $docenteEntity?->nome;
+                $this->fetchTable('Professores');
+                $nome = $this->Professores->find();
+                $nome->where(['Professores.id' => $data['docente_id']]);
+                $professorEntity = $nome->first();
+                $professor = $professorEntity?->nome;
                 $data['segmento'] = 'docente';
                 $data['segmento_id'] = $data['docente_id'];
-                $data['nome'] = $docente;
+                $data['nome'] = $professor;
             elseif ($data['tae_id']):
                 $this->fetchTable('Taes');
                 $nome = $this->Taes->find();
@@ -78,10 +78,10 @@ class EssextensoesController extends AppController {
             }
             $this->Flash->error(__('The extensao could not be saved. Please, try again.'));
         }
-        $docentes = $this->Essextensoes->Docentes->find('list', ['limit' => 200])->all();
+        $professores = $this->Essextensoes->Professores->find('list', ['limit' => 200])->all();
         $taes = $this->Essextensoes->Taes->find('list', ['limit' => 200])->all();
         $situacaopr5s = $this->Essextensoes->Situacaopr5->find('list', ['limit' => 200])->all();
-        $this->set(compact('essextensao', 'docentes', 'taes', 'situacaopr5s'));
+        $this->set(compact('essextensao', 'professores', 'taes', 'situacaopr5s'));
     }
 
     /**
@@ -99,14 +99,14 @@ class EssextensoesController extends AppController {
 
             $data = $this->request->getData();
             if ($data['docente_id']):
-                $this->fetchTable('Docentes');
-                $nome = $this->Docentes->find();
-                $nome->where(['Docentes.id' => $data['docente_id']]);
-                $docenteEntity = $nome->first();
-                $docente = $docenteEntity?->nome;
+                $this->fetchTable('Professores');
+                $nome = $this->Professores->find();
+                $nome->where(['Professores.id' => $data['docente_id']]);
+                $professorEntity = $nome->first();
+                $professor = $professorEntity?->nome;
                 $data['segmento'] = 'docente';
                 $data['segmento_id'] = $data['docente_id'];
-                $data['nome'] = $docente;
+                $data['nome'] = $professor;
             elseif ($data['tae_id']):
                 $this->fetchTable('Taes');
                 $nome = $this->Taes->find();
@@ -126,10 +126,10 @@ class EssextensoesController extends AppController {
             }
             $this->Flash->error(__('The extensao could not be saved. Please, try again.'));
         }
-        $docentes = $this->Essextensoes->Docentes->find('list', ['limit' => 250])->all();
+        $professores = $this->Essextensoes->Professores->find('list', ['limit' => 250])->all();
         $taes = $this->Essextensoes->Taes->find('list', ['limit' => 200])->all();
         $situacaopr5s = $this->Essextensoes->Situacaopr5->find('list', ['limit' => 5])->all();
-        $this->set(compact('extensao', 'docentes', 'taes', 'situacaopr5s'));
+        $this->set(compact('extensao', 'professores', 'taes', 'situacaopr5s'));
     }
 
     /**

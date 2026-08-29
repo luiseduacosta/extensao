@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Extensao $extensao
- * @var string[]|\Cake\Collection\CollectionInterface $docentes
+ * @var string[]|\Cake\Collection\CollectionInterface $professores
  * @var string[]|\Cake\Collection\CollectionInterface $taes
  */
 // pr($extensao);
@@ -29,7 +29,7 @@
                 <legend><?= __('Editar') ?></legend>
                 <?php
                     echo $this->Form->control('titulo', ['type' => 'text', 'label' => ['text' => 'Título']]);
-                    echo $this->Form->control('docente_id', ['options' => $docentes, 'empty' => true]);
+                    echo $this->Form->control('docente_id', ['options' => $professores, 'empty' => true]);
                     echo $this->Form->control('tae_id', ['options' => $taes, 'empty' => true]);
                     echo $this->Form->control('segmento');
                     echo $this->Form->control('segmento_id');

@@ -25,7 +25,7 @@ class ExtensaoTableTest extends TestCase
      */
     protected array $fixtures = [
         'app.Extensao',
-        'app.Docentes',
+        'app.Professores',
         'app.Taes',
         'app.Segmentos',
         'app.Situacaopr5s',

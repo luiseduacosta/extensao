@@ -20,7 +20,7 @@ use Cake\ORM\Entity;
  * @property string $tipo
  * @property string|null $observacoes
  *
- * @ * @property Docente $docente
+ * @ * @property Professor $professor
  * @property Tae $tae
  * @property Situacaopr5 $situacaopr5
  * @property Extensionista[] $extensionistas
@@ -48,7 +48,7 @@ class Essextensao extends Entity
         'versao' => true,
         'tipo' => true,
         'observacoes' => true,
-        'docente' => true,
+        'professor' => true,
         'tae' => true,
         'situacaopr5' => true,
         'extensionistas' => true,

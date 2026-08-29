@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
 /**
  * Extensoes Model
  *
- * @property \App\Model\Table\DocentesTable&\Cake\ORM\Association\BelongsTo $Docentes
+ * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
  * @property \App\Model\Table\TaesTable&\Cake\ORM\Association\BelongsTo $Taes
 // Removed invalid property reference to SegmentosTable as it was causing an unknown class error
  * @property \App\Model\Table\Situacaopr5Table&\Cake\ORM\Association\BelongsTo $Situacaopr5
@@ -47,7 +47,7 @@ class EssextensoesTable extends Table {
         $this->setDisplayField('titulo');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Docentes', [
+        $this->belongsTo('Professores', [
             'foreignKey' => 'docente_id',
         ]);
         $this->belongsTo('Taes', [
@@ -130,7 +130,7 @@ class EssextensoesTable extends Table {
      * @return RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
-        $rules->add($rules->existsIn('docente_id', 'Docentes'), ['errorField' => 'docente_id']);
+        $rules->add($rules->existsIn('docente_id', 'Professores'), ['errorField' => 'docente_id']);
         $rules->add($rules->existsIn('tae_id', 'Taes'), ['errorField' => 'tae_id']);
         // $rules->add($rules->existsIn('segmento_id', 'Segmentos'), ['errorField' => 'segmento_id']);
         $rules->add($rules->existsIn('situacaopr5_id', 'Situacaopr5'), ['errorField' => 'situacaopr5_id']);
