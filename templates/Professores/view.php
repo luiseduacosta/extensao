@@ -97,7 +97,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Estagiários Count') ?></th>
-                    <td><?= $professor->estagiario_count === null ? '' : $this->Number->format($professor->estagiario_count) ?></td>
+                    <td><?= $professor->estagiarios_count === null ? '' : $this->Number->format($professor->estagiarios_count) ?></td>
                 </tr>
             </table>
             <div class="text">

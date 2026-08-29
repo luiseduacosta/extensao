@@ -127,10 +127,6 @@ class ProfessoresTable extends Table
             ->allowEmptyString('user_id');
 
         $validator
-            ->integer('estagiario_count')
-            ->allowEmptyString('estagiario_count');
-
-        $validator
             ->scalar('observacoes')
             ->allowEmptyString('observacoes');
 

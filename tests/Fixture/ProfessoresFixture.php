@@ -33,7 +33,6 @@ class ProfessoresFixture extends TestFixture
                 'motivoegresso' => 'Lorem ipsum dolor sit amet',
                 'status' => 'ativo',
                 'user_id' => 1,
-                'estagiario_count' => 0,
                 'observacoes' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'estagiarios_count' => 0,
             ],
