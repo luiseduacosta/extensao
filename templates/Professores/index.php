@@ -37,6 +37,8 @@ endif;
                         <th><?= $this->Paginator->sort('status', ['Status']) ?></th>
                     <?php endif; ?>
                     <th><?= $this->Paginator->sort('departamento', ['Departamento']) ?></th>
+                    <th><?= $this->Paginator->sort('status', ['Status']) ?></th>
+                    <th><?= $this->Paginator->sort('estagiarios_count', ['Estagiários']) ?></th>
                     <th><?= $this->Paginator->sort('dataegresso', ['Data de egresso']) ?></th>
                     <th><?= $this->Paginator->sort('motivoegresso', ['Motivo de egresso']) ?></th>
                     <?php if ($user->categoria == 1): ?>
@@ -68,9 +70,17 @@ endif;
                             <td><?= h($professor->dataingresso) ?></td>
                             <td><?= h($professor->status) ?></td>
                         <?php endif; ?>
+<<<<<<< HEAD:templates/Professores/index.php
                         <td><?= h($professor->departamento) ?></td>
                         <td><?= h($professor->dataegresso) ?></td>
                         <td><?= h($professor->motivoegresso) ?></td>
+=======
+                        <td><?= h($docente->departamento) ?></td>
+                        <td><?= h($docente->status) ?></td>
+                        <td><?= $docente->estagiarios_count ?? 0 ?></td>
+                        <td><?= h($docente->dataegresso) ?></td>
+                        <td><?= h($docente->motivoegresso) ?></td>
+>>>>>>> 9765082 (Several fixes.):templates/Docentes/index.php
                         <?php if ($user->categoria == 1): ?>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['action' => 'view', $professor->id]) ?>
