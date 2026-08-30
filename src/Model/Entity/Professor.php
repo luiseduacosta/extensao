@@ -11,17 +11,18 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $nome
  * @property string|null $cpf
- * @property int|null $siape
+ * @property string|null $siape
  * @property string|null $cress
  * @property string|null $regiao
- * @property int|null $codigo_telefone
+ * @property string|null $codigo_telefone
  * @property string|null $telefone
- * @property int|null $codigo_celular
+ * @property string|null $codigo_celular
  * @property string|null $celular
  * @property string|null $email
  * @property string|null $curriculolattes
  * @property \Cake\I18n\Date|null $atualizacaolattes
  * @property \Cake\I18n\Date|null $dataingresso
+ * @property string|null $tipocargo
  * @property string|null $departamento
  * @property \Cake\I18n\Date|null $dataegresso
  * @property string|null $motivoegresso
@@ -29,11 +30,18 @@ use Cake\ORM\Entity;
  * @property int|null $user_id
  * @property string|null $observacoes
  * @property int|null $estagiarios_count
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  *
  * @property \App\Model\Entity\Essextensao[] $essextensoes
  */
 class Professor extends Entity
 {
+    /**
+     * Fields that can be mass assigned using newEntity() or patchEntity().
+     *
+     * @var array<string, bool>
+     */
     protected array $_accessible = [
         'nome' => true,
         'cpf' => true,
@@ -48,6 +56,7 @@ class Professor extends Entity
         'curriculolattes' => true,
         'atualizacaolattes' => true,
         'dataingresso' => true,
+        'tipocargo' => true,
         'departamento' => true,
         'dataegresso' => true,
         'motivoegresso' => true,
@@ -55,6 +64,8 @@ class Professor extends Entity
         'user_id' => true,
         'observacoes' => true,
         'estagiarios_count' => true,
+        'created' => true,
+        'modified' => true,
         'essextensoes' => true,
     ];
 }
