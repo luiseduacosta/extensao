@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\Fixture;
 
+use Cake\Database\Schema\TableSchema;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
@@ -19,9 +20,9 @@ class ProfessoresFixture extends TestFixture
         'siape' => ['type' => 'string', 'length' => 8, 'null' => true],
         'cress' => ['type' => 'string', 'length' => 10, 'null' => true],
         'regiao' => ['type' => 'string', 'length' => 2, 'null' => true],
-        'codigo_telefone' => ['type' => 'string', 'length' => 2, 'null' => true],
+        'codigo_telefone' => ['type' => 'char', 'length' => 2, 'null' => true],
         'telefone' => ['type' => 'string', 'length' => 15, 'null' => true],
-        'codigo_celular' => ['type' => 'string', 'length' => 2, 'null' => true],
+        'codigo_celular' => ['type' => 'char', 'length' => 2, 'null' => true],
         'celular' => ['type' => 'string', 'length' => 15, 'null' => true],
         'email' => ['type' => 'string', 'length' => 255, 'null' => true],
         'curriculolattes' => ['type' => 'string', 'length' => 50, 'null' => true],
@@ -32,11 +33,11 @@ class ProfessoresFixture extends TestFixture
         'dataegresso' => ['type' => 'date', 'null' => true],
         'motivoegresso' => ['type' => 'string', 'length' => 100, 'null' => true],
         'status' => ['type' => 'string', 'length' => 10, 'null' => false, 'default' => 'ativo'],
-        'observacoes' => ['type' => 'text', 'null' => true],
-        'user_id' => ['type' => 'integer', 'null' => true],
-        'estagiarios_count' => ['type' => 'integer', 'null' => true, 'default' => 0],
-        'created' => ['type' => 'datetime', 'null' => false],
-        'modified' => ['type' => 'datetime', 'null' => false],
+        'observacoes' => ['type' => 'text', 'length' => TableSchema::LENGTH_MEDIUM, 'null' => true],
+        'user_id' => ['type' => 'integer', 'unsigned' => true, 'null' => true],
+        'estagiarios_count' => ['type' => 'integer', 'unsigned' => true, 'null' => true, 'default' => 0],
+        'created' => ['type' => 'datetime', 'null' => false, 'default' => 'CURRENT_TIMESTAMP'],
+        'modified' => ['type' => 'datetime', 'null' => false, 'default' => 'CURRENT_TIMESTAMP'],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id']],
         ],

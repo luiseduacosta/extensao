@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Cake\Database\Schema\TableSchema;
 use Migrations\BaseMigration;
 
 class CreateProfessores extends BaseMigration
@@ -35,7 +36,7 @@ class CreateProfessores extends BaseMigration
                 'limit' => 2,
                 'null' => true,
             ])
-            ->addColumn('codigo_telefone', 'string', [
+            ->addColumn('codigo_telefone', 'char', [
                 'default' => '21',
                 'limit' => 2,
                 'null' => true,
@@ -45,7 +46,7 @@ class CreateProfessores extends BaseMigration
                 'limit' => 15,
                 'null' => true,
             ])
-            ->addColumn('codigo_celular', 'string', [
+            ->addColumn('codigo_celular', 'char', [
                 'default' => '21',
                 'limit' => 2,
                 'null' => true,
@@ -94,15 +95,18 @@ class CreateProfessores extends BaseMigration
             ])
             ->addColumn('observacoes', 'text', [
                 'default' => null,
+                'length' => TableSchema::LENGTH_MEDIUM,
                 'null' => true,
             ])
             ->addColumn('user_id', 'integer', [
                 'default' => null,
                 'null' => true,
+                'unsigned' => true,
             ])
             ->addColumn('estagiarios_count', 'integer', [
                 'default' => 0,
                 'null' => true,
+                'unsigned' => true,
             ])
             ->addColumn('status', 'string', [
                 'default' => 'ativo',
@@ -110,12 +114,13 @@ class CreateProfessores extends BaseMigration
                 'null' => false,
             ])
             ->addColumn('created', 'datetime', [
-                'default' => null,
+                'default' => 'CURRENT_TIMESTAMP',
                 'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
-                'default' => null,
+                'default' => 'CURRENT_TIMESTAMP',
                 'null' => false,
+                'update' => 'CURRENT_TIMESTAMP',
             ])
             ->create();
     }
